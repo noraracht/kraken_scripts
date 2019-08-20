@@ -9,6 +9,15 @@ qplot(CL/100,(error),data=dm,linetype=variable,shape=bin,color=variable)+geom_li
   scale_y_continuous(labels=percent,name="Relative error in Skmer distance")+scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]))+
   scale_color_brewer(name="Filtering", palette = "Set2")+  
   scale_linetype_manual(name="Filtering",values=c(2,1))+scale_shape(name="M")+
-  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = c(.449,.91),legend.direction = "horizontal")
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = c(.449,.91),legend.direction = "horizontal",panel.grid.major.y = element_line(linetype = 1,size=0.3,color="gray"))
 ggsave("E2.pdf",width = 4.5,height = 6.5)
+
+qplot(CL/100,sign(error)*sqrt(abs(error)),data=dm,linetype=variable,shape=bin,color=variable)+geom_line()+
+  facet_grid(Dist~.,scales="free_y")+
+  scale_y_continuous(labels=percent,name="Relative error in Skmer distance",breaks=sqrt(c(0,0.01,0.1,0.5,1,5,10)))+
+  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]))+
+  scale_color_brewer(name="Filtering", palette = "Set2")+  
+  scale_linetype_manual(name="Filtering",values=c(2,1))+scale_shape(name="M")+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",legend.direction = "horizontal",panel.grid.major.y = element_line(linetype = 1,size=0.3,color="gray"))
+ggsave("E2-sqrt.pdf",width = 4.5,height = 6.5)
 
