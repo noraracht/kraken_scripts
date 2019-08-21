@@ -21,3 +21,9 @@ qplot(value,C_sequences_prct/100,color=prct_species,data=m)+
   scale_color_continuous(name="Species Classification")
 ggsave("classified-vs-match-full.pdf",width = 6, height = 4.5)
 
+qplot(C_sequences_prct/100,prct_species/100,data=m[m$variable=="mash_10K_distance" & m$value<.3,])+
+  geom_abline(linetype=2,color="red")+theme_classic()+
+  scale_y_continuous(labels=percent, name="Classified at any level")+
+  scale_x_continuous(labels=percent, name ="Classified at the species level")
+ggsave("domain-species.pdf",width = 4, height = 4)
+
