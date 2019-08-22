@@ -30,18 +30,18 @@ qplot(cl/100,error,data=dm[dm$k != 29,],linetype=Kraken,shape=bin,color=Kraken)+
 
 qplot(cl/100,(error),data=dm[dm$k != 29,],linetype=Kraken,color=k,shape=k)+geom_line()+
   facet_grid(percent(round(D,3))~bin,scales="free",space = "free_x")+
-  scale_y_continuous(name="Relative error in Skmer distance")+ #,breaks=c(-sqrt(0.05),sqrt(c(0,0.05,0.2,0.5,1,2,5))),labels=function(x) percent(sign(x)*x^2))+
-  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]))+
+  scale_y_continuous(name="Relative error in Skmer distance", labels = percent)+ #,breaks=c(-sqrt(0.05),sqrt(c(0,0.05,0.2,0.5,1,2,5))),labels=function(x) percent(sign(x)*x^2))+
+  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]),breaks=c(0,0.05,.1,0.2,0.4,0.6))+
   scale_color_manual(values=c("#fecc5c","#fd8d3c","#e31a1c","black"))+  
-  scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0:2,19))+
+  scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0,2,6,19))+
   theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.24,color="gray"))
-ggsave("E2.pdf",width = 10.5,height = 8)
+ggsave("E2.pdf",width = 8,height = 7)
 
 qplot(cl/100,sign(error)*sqrt(abs(error)),data=dm[dm$k != 29,],linetype=Kraken,color=k,shape=k)+geom_line()+
   facet_grid(percent(round(D,3))~bin,scales="free",space = "free_x")+
   scale_y_continuous(name="Relative error in Skmer distance",breaks=c(-sqrt(0.05),sqrt(c(0,0.05,0.2,0.5,1,2,5))),labels=function(x) percent(sign(x)*x^2))+
-  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]))+
+  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]),breaks=c(0,0.05,.1,0.2,0.4,0.6))+
   scale_color_manual(values=c("#fecc5c","#fd8d3c","#e31a1c","black"))+  
-  scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0:2,19))+
-  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.24,color="gray"))
-ggsave("E2-sqrt.pdf",width = 10.5,height = 8)
+  scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0,2,6,19))+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))
+ggsave("E2-sqrt.pdf",width = 8,height = 7)
