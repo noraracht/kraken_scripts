@@ -45,7 +45,7 @@ ggplot(aes(x=as.factor(bin),group=interaction(confidence_level,k),color=interact
   scale_x_discrete(name="Distance to the closest match (M)",labels=c("0","(0-1]","(1-2]","(2-3]","(3-5]","(5-10]","(10-15]","(15-20]","(20-25]",">25"))+
   theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1))+
   scale_y_continuous(name="Recall",labels=percent,sec.axis = sec_axis(~.*1, name = "FPR", labels = percent, breaks = c(0,0.045,0.086,.54,1)))+
-  scale_color_brewer(palette = "Paired", name=expression(alpha~"/"~k),labels=function(x) {gsub(pattern = "(.*) / (.*)","\\2 \\1",sub(pattern = "-","",x))})
+  scale_color_brewer(palette = "Paired", name=expression(k~"/"~alpha),labels=function(x) {gsub(pattern = "(.*) / (.*)","\\2 / \\1",sub(pattern = "-","",x))})
 ggsave("Recall-FPR.pdf",width = 6.9, height = 4.5)
 
 
