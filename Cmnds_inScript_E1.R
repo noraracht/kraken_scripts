@@ -5,12 +5,12 @@ names(d)
 
 qplot(value,C_sequences_prct/100,color=prct_species,data=m[m$variable=="mash_10K_distance" & m$value<.3,])+
   #facet_wrap(~variable,scales = "free_x",nrow=2,labeller = function(x) {x$"variable"=c("Marker-based phylogenetic distance","Genome-wide Skmer distance");x})+
-  theme_bw()+theme(legend.position = "bottom")+
+  theme_light()+theme(legend.position = c(.62,.9),legend.direction="horizontal")+
   geom_smooth(se =F,color="red", method="lm")+
-  ylab(expression("Reads classified by Krarken"~(1-f[n])))+xlab("Distance to the closest reference species")+
+  ylab(expression("Reads classified by Krarken"~(1-f[n])))+xlab("Distance to the closest match (M)")+
   scale_y_continuous(labels=percent)+
-  scale_color_continuous(name="Species Classification")
-ggsave("classified-vs-match.pdf",width = 4*1.25, height = 3.5*1.25)
+  scale_color_continuous(name="Species level")
+ggsave("classified-vs-match.pdf",width = 4*1, height = 4*1)
 
 qplot(value,C_sequences_prct/100,color=prct_species,data=m)+
   facet_wrap(~variable,scales = "free_x",nrow=1,labeller = function(x) {x$"variable"=c("Marker-based phylogenetic distance","Genome-wide Skmer distance");x})+
