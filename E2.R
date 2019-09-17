@@ -41,8 +41,8 @@ qplot(cl/100,sign(error)*sqrt(abs(error)),data=dm[!dm$k %in% c(29,32),],linetype
   facet_grid(percent(round(D,3))~bin,scales="free",space = "free_x")+
   scale_y_continuous(name="Relative error in Skmer distance",breaks=function(x) {if (x[2]<1.1) c(-sqrt(0.01),sqrt(c(0,0.01,0.05,0.2,0.5))) else c(-sqrt(0.05),sqrt(c(0,0.05,0.2,0.5,2,5)))},labels=function(x) percent(sign(x)*x^2))+
   scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]),breaks=c(0,0.05,.1,0.2,0.4,0.6))+
-  scale_color_manual(values=c("#fecc5c","#fd8d3c",#"#e31a1c",
-                              "black"))+  
+  scale_color_manual(values=c("#fecc5c",#"#fd8d3c",
+                              "#e31a1c","black"))+  
   scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0,2,6,19))+
   theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))
 ggsave("E2-sqrt.pdf",width = 8,height = 7)
