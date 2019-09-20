@@ -1,0 +1,15 @@
+file_name,species,U_sequences,C_sequences,U_sequences_prct,C_sequences_prct,bacteria_sequences,archaea_sequences,viruses_sequences,eukaryota_sequences,human_sequences,bacteria_sequences_prct,archaea_sequences_prct,viruses_sequences_prct,eukaryota_sequences_prct,human_sequences_prct
+report_sub_Drosophila_erecta_2.fq,Drosophila_erecta,414595,26618,93.97,6.03,14156,474,399,10219,10219,3.21,0.11,0.09,2.32,2.32
+report_sub_Drosophila_biarmipes_2.fq,Drosophila_biarmipes,417641,25430,94.26,5.74,14926,546,317,8610,8610,3.37,0.12,0.07,1.94,1.94
+report_sub_Drosophila_pseudoobscura_2.fq,Drosophila_pseudoobscura,373992,33138,91.86,8.14,14682,404,505,15875,15875,3.61,0.1,0.12,3.9,3.9
+report_sub_Drosophila_bipectinata_2.fq,Drosophila_bipectinata,357541,41501,89.6,10.4,27719,475,275,11363,11363,6.95,0.12,0.07,2.85,2.85
+report_sub_Drosophila_ananassae_2.fq,Drosophila_ananassae,318564,44203,87.82,12.18,33411,466,261,8884,8884,9.21,0.13,0.07,2.45,2.45
+report_sub_Drosophila_mauritiana_2.fq,Drosophila_mauritiana,391483,27721,93.39,6.61,16140,451,326,9607,9607,3.85,0.11,0.08,2.29,2.29
+report_sub_Drosophila_virilis_2.fq,Drosophila_virilis,286629,50727,84.96,15.04,28794,533,420,18909,18909,8.54,0.16,0.12,5.61,5.61
+report_sub_Drosophila_persimilis_2.fq,Drosophila_persimilis,363438,36124,90.96,9.04,18542,380,607,14986,14986,4.64,0.1,0.15,3.75,3.75
+report_sub_Drosophila_mojavensis_2.fq,Drosophila_mojavensis,364696,61533,85.56,14.44,19783,694,631,36807,36807,4.64,0.16,0.15,8.64,8.64
+report_sub_Drosophila_simulans_2.fq,Drosophila_simulans,389995,22601,94.52,5.48,11045,490,279,9704,9704,2.68,0.12,0.07,2.35,2.35
+report_sub_Drosophila_sechellia_2.fq,Drosophila_sechellia,365834,27320,93.05,6.95,16480,427,311,9038,9038,4.19,0.11,0.08,2.3,2.3
+report_sub_Drosophila_yakuba_2.fq,Drosophila_yakuba,386989,24321,94.09,5.91,12445,402,325,9976,9976,3.03,0.1,0.08,2.43,2.43
+report_sub_Drosophila_willistoni_2.fq,Drosophila_willistoni,320344,39596,89,11,14914,573,401,21952,21952,4.14,0.16,0.11,6.1,6.1
+report_sub_Drosophila_eugracilis_2.fq,Drosophila_eugracilis,380129,37904,90.93,9.07,21879,543,394,13422,13422,5.23,0.13,0.09,3.21,3.21
