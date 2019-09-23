@@ -120,8 +120,8 @@ ggsave("d-vs-cont.pdf",width=5.5,height=4)
 jh = function(d,h=0,cl=0) {c=2*cl/(1-cl); hx=h*c/(1+h); ((1-d)+hx)/(1+d+c-hx) }; # Jaccard with no correction
 
 
-cp=c((1:4)/50,(1:5)/10);
-Ds = c(0.001,0.02,0.06,0.12,0.24)
+cp=c(0.01,0.02,0.05,(1:5)/10);
+Ds = c(0.002,0.007,0.02,0.06,0.18)
 Hs = (0:100)/100
 a = expand.grid(D=Ds, cl=cp, h=Hs)
 a = data.frame(a, rbind(
@@ -141,14 +141,12 @@ qplot(cl, abs(cord-estd)/cord,color=sqrt(h),group=h, data=a,geom="line") +facet_
   scale_color_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
   
 
-qplot(h, ((cord-estd)/cord),color=cl #factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T)))
-      ,
+qplot(h, ((cord-estd)/cord),color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
       group=cl, data=a,geom="line") +facet_wrap(~D,nrow=1,labeller = label_both)+
-    theme_classic()+ scale_color_distiller(palette = "YlOrRd",name=expression(c[l])) + coord_cartesian(ylim=c(-1.5,1))+
+    theme_classic()+ scale_color_brewer(palette = "Spectral",name=expression(c[l])) + coord_cartesian(ylim=c(-1.5,1))+
     scale_y_continuous(name=expression(frac("true"-"estimated","true")~D),label=percent)+
   scale_x_continuous(labels=percent,name="Contaminant Jaccard")+
-    theme(legend.position=c(.8,.18),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
-          panel.grid.major.y = element_line(size = 0.08,color = "gray70"))#+
-  geom_hline(yintercept=0,linetype=2,color="blue")
+    theme(legend.position=c(.85,.18),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+          panel.grid.major.y = element_line(size = 0.08,color = "gray70"))
 ggsave("j-h.pdf",width=11,height = 2.8)  
   
