@@ -141,9 +141,10 @@ qplot(cl, abs(cord-estd)/cord,color=sqrt(h),group=h, data=a,geom="line") +facet_
   scale_color_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
   
 
-qplot(h, ((cord-estd)/cord),color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
+qplot(h, ((cord-estd)/cord),color=cl #factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T)))
+      ,
       group=cl, data=a,geom="line") +facet_wrap(~D,nrow=1,labeller = label_both)+
-    theme_classic()+ scale_color_brewer(palette = "Reds",name=expression(c[l])) + coord_cartesian(ylim=c(-1.5,1))+
+    theme_classic()+ scale_color_distiller(palette = "YlOrRd",name=expression(c[l])) + coord_cartesian(ylim=c(-1.5,1))+
     scale_y_continuous(name=expression(frac("true"-"estimated","true")~D),label=percent)+
   scale_x_continuous(labels=percent,name="Contaminant Jaccard")+
     theme(legend.position=c(.8,.18),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
