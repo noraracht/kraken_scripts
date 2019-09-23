@@ -33,11 +33,11 @@ ggsave("ROC-perbin-full_extended.pdf",width=8,height = 4.8)
 
 qplot(FPR,recall,shape=as.factor(confidence_level),color=factor(k),group=k,data=r[r$FPR<1.3&r$confidence_level<0.4& !r$k %in% c(20,27,29),])+
   geom_line()+
-  facet_wrap(~bin,ncol=7,labeller = function(x) {x$bin=c("0","(0-1]","(1-2]","(2-3]","(3-5]","(5-10]","(10-15]","(15-20]","(20-25]",">25");x})+
+  facet_wrap(~bin,ncol=6,labeller = function(x) {x$bin=c("0","(0-1]","(1-2]","(2-3]","(3-5]","(5-10]","(10-15]","(15-20]","(20-25]",">25");x})+
   scale_shape_manual(name=expression(alpha),values=c(1,0,2,6,5,4))+scale_color_brewer(palette = "Dark2", name="k", direction = -1)+
-  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = c(.76,.13),legend.direction = "horizontal",legend.box.background =  element_rect(linetype = 2))+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = c(.84,.23),legend.direction = "horizontal",legend.box.background =  element_rect(linetype = 2))+
   scale_x_continuous(breaks=c(0.2,0.5,0.8))+scale_y_continuous(labels=percent, name="Recall")
-ggsave("ROC-perbin_extended-col.pdf",width=8*1.1,height =3*1.1)
+ggsave("ROC-perbin_extended-col.pdf",width=8*1.2,height =3*1.2)
 
 qplot(FPR,recall,shape=as.factor(confidence_level),color=factor(bin),group=bin,data=r[r$FPR<0.2&r$confidence_level<0.4& !r$k %in% c(20,27,29),])+
   facet_wrap(~k,nrow=1,labeller = label_both)+geom_line()+

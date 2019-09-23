@@ -4,7 +4,7 @@ require(scales)
 # assume:
 #  1- all clamination is unshared
 
-j = function(x,fp=0,cl=0,fn=0) { (1-x)*(1-cl)/(2-(1-x)*(1-cl)) }; # Jaccard with no correction
+j = function(x,fp=0,cl=0) { (1-x)*(1-cl)/(2-(1-x)*(1-cl)) }; # Jaccard with no correction
 
 #  2- FP is randomly distributed across the genome but the same exact positions will be FP in the two genomes. 
 j2 = function(x,fp=0,cl=0,fn=0) { ((1-cl)*(1-x)*(1-fp))/((1-cl)*(1+x)*(1-fp)+2*fn*cl) };                               # Jaccard with correction
@@ -114,3 +114,43 @@ ggsave("j-vs-cont-rel.pdf",width=5.5,height=4)
 qplot(cl, (estd-cord)/cord,color=sqrt(d),group=d, data=a[a$cord!=0,],geom="line")+theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")"))+scale_y_log10(name=expression(frac("estimated"-"true","true")~" genomic distance (D)"),breaks=c(0.001,0.01, 0.1,1,10),labels=scales::comma)+scale_color_continuous(name=element_blank(),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")},breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)))+theme(legend.position=c(.87,.22))+geom_text(aes(label=d,color=sqrt(d)),data=a[a$cl==max(a$cl) & a$d %in%c(0.001,0.01,0.02,0.03,0.05,0.08,0.12,0.2),],nudge_x=0.028,size=3.2)+geom_hline(yintercept=0.1,linetype=3,color="gray50")
 ggsave("d-vs-cont.pdf",width=5.5,height=4)
 
+
+
+
+jh = function(d,h=0,cl=0) {c=2*cl/(1-cl); hx=h*c/(1+h); ((1-d)+hx)/(1+d+c-hx) }; # Jaccard with no correction
+
+
+cp=c((1:4)/50,(1:5)/10);
+Ds = c(0.001,0.02,0.06,0.12,0.24)
+Hs = (0:100)/100
+a = expand.grid(d=Ds, cl=cp, h=Hs)
+a = data.frame(a, rbind(
+  data.frame(M="Unfiltered", est=apply(a,1, FUN=function(x) {jh(d=d(x[[1]]),h=x[[3]],cl=x[[2]])}))
+),
+cor=apply(a,1,function(x) j(d(x[[1]]))))
+a$estd = dj (a$est)
+a$cord = dj (a$cor)
+qplot(cl, abs(cor-est)/cor,color=sqrt(h),group=h, data=a,geom="line") +facet_wrap(~((d)),scales="free_y")+
+ theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) +
+  scale_y_log10(name=expression(frac("true"-"estimated","true")~Jaccard))#+
+  scale_color_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
+
+qplot(cl, abs(cord-estd)/cord,color=sqrt(h),group=h, data=a,geom="line") +facet_wrap(~((d)),scales = "free_x")+
+    theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) +
+    scale_y_log10(name=expression(frac("true"-"estimated","true")~D))#+
+  scale_color_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
+  
+
+qplot(h, ((cord-estd)/cord),color=(cl),group=cl, data=a,geom="line") +facet_wrap(~d,nrow=1)+
+    theme_classic()+ scale_color_continuous(labels=percent,name=expression(c[l]),breaks=c(0.1,.3,.5)) + coord_cartesian(ylim=c(-1.5,1))+
+    scale_y_continuous(name=expression(frac("true"-"estimated","true")~D),label=percent)+
+  scale_x_continuous(labels=percent,name="Contaminant Jaccard")+
+    theme(legend.position=c(.91,.18),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+          panel.grid.major.y = element_line(size = 0.08,color = "gray70"))+
+  geom_hline(yintercept=0,linetype=2,color="red")
+ggsave("j-h.pdf",width=10,height = 2.8)  
+  
+qplot(as.factor(cor),h,fill=abs(cord-estd)/cord,group=h, data=a,geom="tile") +facet_wrap(~cl)+
+    theme_classic()# +
+  scale_fill_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
+  
