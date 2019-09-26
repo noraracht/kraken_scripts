@@ -46,3 +46,14 @@ qplot(cl/100,sign(error)*sqrt(abs(error)),data=dm[!dm$k %in% c(29,32),],linetype
   scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0,2,6,19))+
   theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))
 ggsave("E2-sqrt.pdf",width = 8,height = 7)
+
+
+
+qplot(cl/100,(abs(error)),data=dm[!dm$k %in% c(29,28,32) & dm$Pair == "Medium"  & dm$cl <30,],linetype=Kraken,color=bin,shape=bin)+geom_line()+
+  #facet_grid(percent(round(D,3))~bin,scales="free",space = "free_x",labeller = label_both)+
+  scale_y_continuous(name="Relative error in Skmer distance",label=percent)+
+  scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")"))+
+  scale_color_brewer(palette = "RdBu",direction = -1)+ #Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3
+  scale_linetype_manual(name=element_blank(),values=c(2,1),labels=c("Before Filtering","After Filtering"))+scale_shape_manual(values=c(0,2,6,1))+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = c(.25,.62),panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))
+ggsave("E2-Medium.pdf",width = 3.7,height = 3.7)

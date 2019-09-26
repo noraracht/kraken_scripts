@@ -1,9 +1,9 @@
 require(ggplot2); require(scales); require(reshape2); require(Hmisc)
 getwd()
-setwd("/Users/admin/Documents/Skimming/tree_of_life/dros_contam_test")
+#setwd("/Users/admin/Documents/Skimming/tree_of_life/dros_contam_test")
 ds = (read.csv("drosophilaskims.csv"))
 names(ds)
-kf= (read.csv('/Users/admin/Documents/Skimming/dros_real_data/14_dros_genomes/report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35/sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv'))
+kf= (read.csv('sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv'))
 names(kf)
 
 ds=(merge(merge(ds,kf[,c(2,6)],by.x = "s1", by.y = "species"),kf[,c(2,6)],by.x = "s2", by.y = "species"))
@@ -60,16 +60,14 @@ ds2[as.character(ds2$s1)<as.character(ds2$s2),"d2"] =ds2[as.character(ds2$s1)<as
 ds2[as.character(ds2$s1)>as.character(ds2$s2),"d2"] =ds2[as.character(ds2$s1)>as.character(ds2$s2),"ak_cleaned"]
 
 ggplot(aes(fill=(d2-fna_dist)/fna_dist, 
-           x=paste(s1,percent(C_sequences_prct.x/100),sep="\n"),y=paste(s2,percent(C_sequences_prct.y/100),sep="\n")),
+           x=sub("_"," ",s1),y=paste(sub("_"," ",s2),percent(C_sequences_prct.y/100),sep="\n")),
        data=ds2)+
   geom_tile()+#geom_smooth(se=F,method="lm",color="red")+
   theme_light()+
-  theme(axis.text.x = element_text(angle=45,hjust=1,vjust=1))+
+  theme(axis.text.x = element_text(angle=25,hjust=1,vjust=1))+
   theme(axis.title.x=element_blank(), axis.title.y = element_blank())+
-  scale_fill_gradient2(name="Relative error",label=percent)#+
-  scale_y_continuous(labels=percent,name="Delta relative error after Kraken")+
-  scale_x_continuous(name=("Proportion filtered by Kraken"),labels=percent)+geom_hline(color="red",linetype=2,yintercept = 0)
-  ggsave("Drosophila_tile_plot.pdf",width=9,height = 8)
+  scale_fill_gradient2(name="Relative error",label=percent)
+  ggsave("Drosophila_tile_plot.pdf",width=9*0.8,height = 7*0.8)
 
 qplot(C_sequences_prct.y/100, abs(bk_cleaned-fna_dist)/fna_dist, data=ds)+
   theme_bw()+theme(axis.text.x = element_text(angle=45,hjust=1,vjust=1))+

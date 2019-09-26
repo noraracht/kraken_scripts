@@ -135,18 +135,41 @@ qplot(cl, abs(cor-est)/cor,color=sqrt(h),group=h, data=a,geom="line") +facet_wra
   scale_y_log10(name=expression(frac("true"-"estimated","true")~Jaccard))#+
   scale_color_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
 
-qplot(cl, abs(cord-estd)/cord,color=sqrt(h),group=h, data=a,geom="line") +facet_wrap(~((D)),scales = "free_x")+
-    theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) +
-    scale_y_log10(name=expression(frac("true"-"estimated","true")~D))#+
-  scale_color_continuous(name=element_blank(),breaks=sqrt(c(0.2,0.12,0.001,0.02,0.06)),labels=function(x) {paste("D=",round(x^2,3),"; d= ",round(d(x^2),2),sep="")})+theme(legend.position=c(.7,.28))+geom_hline(yintercept=0.1,linetype=3,color="gray50")
-  
+p= qplot(cl, (estd-cord)/cord,color=(h),group=h, data=a,geom="line") +
+    theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) + coord_cartesian(ylim=c(1.5,-1)) +
+  scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
+  scale_color_continuous(name="H",labels=percent,transform="sqrt")+
+  geom_hline(yintercept=0,linetype=1,color="red")
 
-qplot(h, ((cord-estd)/cord),color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
+p +  facet_wrap(~D,nrow=1,labeller = label_both)+ 
+  theme(legend.position=c(.89,.78),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+          panel.grid.major.y = element_line(size = 0.05,color = "gray80"))
+ggsave("j-h-cl.pdf",width=11,height = 2.8)  
+
+p +  facet_wrap(~D,nrow=2,labeller = label_both)+ coord_cartesian(xlim=c(0,0.32),ylim=c(1.5,-1)) +
+  theme(legend.position=c(.89,.18),legend.direction = "vertical",panel.border  = element_rect(fill=NA,size = 1),
+        panel.grid.major.y = element_line(size = 0.05,color = "gray80"))
+ggsave("j-h-cl2.pdf",width=5.6,height = 5.6)  
+
+qplot(h, (estd-cord)/cord,color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
       group=cl, data=a,geom="line") +facet_wrap(~D,nrow=1,labeller = label_both)+
-    theme_classic()+ scale_color_brewer(palette = "Spectral",name=expression(c[l])) + coord_cartesian(ylim=c(-1.5,1))+
-    scale_y_continuous(name=expression(frac("true"-"estimated","true")~D),label=percent)+
-  scale_x_continuous(labels=percent,name="Contaminant Jaccard")+
-    theme(legend.position=c(.85,.18),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+    theme_classic()+ scale_color_brewer(palette = "Spectral",name=expression(c[l])) + coord_cartesian(ylim=c(1.5,-1))+
+    scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
+  scale_x_continuous(labels=percent,name="Contaminant Jaccard (H)")+
+    theme(legend.position=c(.86,.83),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
           panel.grid.major.y = element_line(size = 0.08,color = "gray70"))
 ggsave("j-h.pdf",width=11,height = 2.8)  
   
+
+correctd = function(c1=0.15,c2=0.1,h=0.05,dold=0.08886,k=31) {
+  a=c1/(1-c1)+c2/(1-c2); 
+  1- ((1-dold)^k*(1+a/2)-(a*h)/(1+h))^(1/k)
+}
+
+
+correctd2 = function(c1=0.15,c2=0.1,cc=1,h=0.05,dold=0.08886,k=31) {
+  a=c1/(1-c1)+c2/(1-c2); 
+  1- (((1-dold)^k)/cc*(1+a/2)-(a*h)/(1+h))^(1/k)
+}
+
+
