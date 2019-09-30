@@ -19,7 +19,7 @@ qplot(fna_dist,abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_di
   geom_point()+geom_smooth(se=F,method="lm",color="grey50")+
   theme_light()+theme(legend.position = c(.3,.7))+
   scale_color_continuous(name="Filtered",label=percent)+
-  scale_y_continuous(labels=percent,name="Decrease in relative error after Kraken")+
+  scale_y_continuous(labels=percent,name="Reduction in error after Kraken")+
   scale_x_continuous(name=("D"),labels=percent)+geom_hline(yintercept = 0, color="red",linetype=2)
 ggsave("Drosophila-errreduction.pdf",width=5,height = 4.5)
 
@@ -29,7 +29,7 @@ ggplot(aes(x=fna_dist,y=abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dis
   geom_point()+geom_smooth(se=F,method="lm",color="grey50")+
   theme_light()+theme(legend.position = c(.8,.1))+
   scale_color_continuous(name="Filtered",label=percent)+
-  scale_y_continuous(labels=percent,name="Decrease in relative error after Kraken")+
+  scale_y_continuous(labels=percent,name="Reduction in error after Kraken")+
   scale_x_continuous(name=("D"),labels=percent)+geom_hline(yintercept = 0, color="red",linetype=2)+
   facet_wrap(~s1+C_sequences_prct.x)
 ggsave("Drosophila-errreduction-all.pdf",width=9,height = 8)
@@ -37,11 +37,11 @@ ggsave("Drosophila-errreduction-all.pdf",width=9,height = 8)
 ggplot(aes(x=abs(bk_cleaned-fna_dist)/fna_dist,y=abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_dist, color=(C_sequences_prct.x+C_sequences_prct.y)/200),
        data=ds)+
   geom_point()+geom_smooth(se=F,method="lm",color="red")+
-  theme_light()+
+  theme_light()+theme(legend.position = c(.2,.77))+
   scale_color_continuous(name="Filtered",label=percent)+
   scale_y_continuous(labels=percent,name="Reduction in error after Kraken")+
   scale_x_continuous(name=("Error before Kraken"),labels=percent)+geom_hline(color="red",linetype=2,yintercept = 0)
-ggsave("Drosophila-filtered--error_before-red_in_error.pdf",width=9,height = 8)
+ggsave("Drosophila-filtered--error_before-red_in_error.pdf",width=5,height = 4.5)
 
 ggplot(aes(color=abs(bk_cleaned-fna_dist)/fna_dist,y=abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_dist, 
            x=(C_sequences_prct.x+C_sequences_prct.y)/200),
@@ -75,7 +75,18 @@ qplot(C_sequences_prct.y/100, abs(bk_cleaned-fna_dist)/fna_dist, data=ds)+
   stat_summary(color="red")+
   scale_y_continuous(name="Error before Kraken",label=percent)+
   scale_x_continuous(name="Proportion filtered by Kraken",label=percent)
-ggsave("Drosophila--proportion_filtered-error_before_Kraken.pdf",width=9,height = 8)
+ggsave("Drosophila--proportion_filtered-error_before_Kraken.pdf",width=5,height = 4.5)
+
+qplot(C_sequences_prct.y/100,C_sequences_prct.x/100, color=abs(bk_cleaned-fna_dist)/fna_dist, size=1.3,alpha=0.7,
+      data=ds[ds$C_sequences_prct.x>ds$C_sequences_prct.y,])+
+  theme_classic()+theme(axis.text.x = element_text(angle=45,hjust=1,vjust=1),legend.position = c(0.8,0.2))+
+ # geom_smooth(method="lm")+
+  # stat_summary(color="red")+
+  scale_color_gradient2(name="Error before Kraken",na.value = "white",high=("darkred"),midpoint = -0.1)+
+  scale_y_continuous(name="Proportion filtered by Kraken (s2)",label=percent)+
+  scale_x_continuous(name="Proportion filtered by Kraken (s1)",label=percent)+
+  scale_size(guide="none")+scale_alpha(guide="none")
+ggsave("Drosophila--before-vs-kraken.pdf",width=6,height = 6)
 
 qplot(abs(bk_no_clean_up-fna_dist)/fna_dist-abs(bk_cleaned-fna_dist)/fna_dist,data=ds)
 
