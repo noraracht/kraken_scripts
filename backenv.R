@@ -46,7 +46,7 @@ qplot((1-tp),fp,fill=est/cor,label=round(est/cor,digits=2),geom="tile",data=a)+
 ggsave("backenvlope-jacard-h.pdf",width=15,height=6.7)
 
 cp=c(0.02, 0.05, 0.1, .2, .40);  
-r=c(5:10)*8/80; # percent claminant
+r=c(c(5:10)*8/80,0.95,0.99); # percent claminant
 a=expand.grid(tp=r, fp=(0:7)*5/100, d=d( c(0.002,0.007,0.02,0.06,0.18)), cl=cp); 
 a = data.frame(a, #rbind(
 			data.frame(M="Filtered (RR Assumption)", est=apply(a,1, FUN=function(x) {j2(x=x[[3]],cl=x[[4]], fp=x[[2]],fn=(1-x[[1]]))})),
@@ -87,15 +87,24 @@ qplot((1-tp),y=abs((dj(est)-dj(cor))/dj(cor)),color=as.factor(-fp),geom="line",d
 ggsave("backenvlope-RR-d-lines.pdf",width=6.5,height=5.5)
 
 qplot((1-tp),y=abs((dj(est)-dj(cor))/dj(cor)),color=as.factor(-fp),linetype=as.factor(cl),group=interaction(fp,cl),geom="line",
-      data=a[xor(a$tp==0 , a$M!="N") & a$cl %in%c(0.05,0.2) ,])+ 
+      data=a[xor(a$tp==0 , a$M!="N") &a$tp<1 & a$cl %in%c(0.02, 0.05,0.2,0.4) ,])+ 
   facet_grid(.~D,labeller=label_both)+
-  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1))+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1),legend.position="bottom")+
   scale_x_continuous(labels=percent,name=expression("FN rate ("~f[n]~")"),breaks = c(0.01,0.2,0.4))+
-  scale_y_continuous(labels=percent,name="Relative distance error")+
+  scale_y_log10(name=expression(frac("estimated"-"true","true")~D),label=percent)+
   scale_fill_continuous(name="estimated/correct J",guide="none")+
   geom_hline(aes(yintercept=((dj(j(x=d,cl=cl))-dj(j(x=d)))/dj(j(x=d))),linetype=as.factor(cl)),color=2)+
-  scale_linetype_manual(name=expression(c[l]),values=c(2,3))+
+  scale_linetype_manual(name=expression(c[l]),values=c(2,3,4,5))+
   scale_color_brewer(name=expression("FP ("~f[p]~")"),  palette = 1,label=function(x) percent(-as.numeric(x)))
+ggsave("backenvlope-RR-d-lines-compact.pdf",width=11,height = 3.4)
+
+qplot(h, (estd-cord)/cord,color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
+      group=cl, data=a,geom="line") +facet_wrap(~D,nrow=1,labeller = label_both)+
+  theme_classic()+ scale_color_brewer(palette = "Spectral",name=expression(c[l])) + coord_cartesian(ylim=c(1.5,-1))+
+  scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
+  scale_x_continuous(labels=percent,name="Contaminant Jaccard (H)")+
+  theme(legend.position=c(.86,.83),legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+        panel.grid.major.y = element_line(size = 0.08,color = "gray70"))
 
 
 
