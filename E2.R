@@ -57,3 +57,53 @@ qplot(cl/100,(abs(error)),data=dm[!dm$k %in% c(29,28,32) & dm$Pair == "Medium"  
   scale_linetype_manual(name=element_blank(),values=c(2,1),labels=c("Before Filtering","After Filtering"))+scale_shape_manual(values=c(0,2,6,1))+
   theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = c(.25,.62),panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))
 ggsave("E2-Medium.pdf",width = 3.7,height = 3.7)
+
+
+
+
+
+
+
+
+
+####################################
+
+bk = (read.csv('ref_dist_mat_bk_kraken_std_conf0.0_k35.txt.xls',sep="\t")); bk$Filtered=FALSE
+ak = (read.csv('ref_dist_mat_ak_kraken_std_conf0.0_k35.txt.xls',sep="\t")); ak$Filtered=TRUE
+names(ak)=names(bk)
+dh=rbind(bk,ak)
+
+dh=(melt(dh))
+
+db = dh[dh$variable %in%  levels(dh$variable)[1:5] & dh$sample %in%  levels(dh$variable)[1:5] ,]
+dh = dh[!dh$variable %in%  levels(dh$variable)[1:5],]
+
+dh$sample = sub(pattern = "ucseq_", "", dh$sample)
+dh = dh[grep("s1_",dh$sample,),]
+dh = dh[grep("s2_",dh$variable,),]
+
+dh$Overlap =  as.numeric(sub(".*overlap_","",dh$variable))
+dh$Overlap2 =  as.numeric(sub(".*overlap_","",dh$sample))
+
+
+dh$s2 = (sub("_overlap.*","",sub("s2_","",dh$variable)))
+dh$s1 = (sub("_overlap.*","",sub("s1_","",dh$sample)))
+
+dh = dh[dh$Overlap == dh$Overlap2, ]
+
+dh$D = 0
+dh[dh$s2=="Dros_sech","D"] = 0.021215276
+dh[dh$s2=="Drosophila_sim_WXD1","D"] = 0.001933919
+dh[dh$s2=="Drosophila_yakuba","D"] = 0.062705933
+
+
+dh$error = with(dh, (value-D)/D)
+
+qplot(Overlap/100,error,data=dh,color=Filtered,shape=Filtered)+geom_line()+
+  facet_wrap(~percent(round(D,3)))#+
+  scale_y_continuous(name="Relative error in Skmer distance",breaks=function(x) {if (x[2]<1.1) c(-sqrt(0.01),sqrt(c(0,0.01,0.05,0.2,0.5))) else c(-sqrt(0.05),sqrt(c(0,0.05,0.2,0.5,2,5)))},labels=function(x) percent(sign(x)*x^2))+
+  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]),breaks=c(0,0.05,.1,0.2,0.4,0.6))+
+  scale_color_manual(values=c("#fecc5c",#"#fd8d3c",
+                              "#e31a1c","black"))+  
+  scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0,2,6,19))+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))

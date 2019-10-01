@@ -138,7 +138,7 @@ qplot(cl, abs(cor-est)/cor,color=sqrt(h),group=h, data=a,geom="line") +facet_wra
 p= qplot(cl, (estd-cord)/cord,color=(h),group=h, data=a,geom="line") +
     theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) + coord_cartesian(ylim=c(1.5,-1)) +
   scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
-  scale_color_continuous(name="H",labels=percent,transform="sqrt")+
+  scale_color_continuous(name="H",labels=percent)+
   geom_hline(yintercept=0,linetype=1,color="red")
 
 p +  facet_wrap(~D,nrow=1,labeller = label_both)+ 
@@ -163,13 +163,52 @@ ggsave("j-h.pdf",width=11,height = 2.8)
 
 correctd = function(c1=0.15,c2=0.1,h=0.05,dold=0.08886,k=31) {
   a=c1/(1-c1)+c2/(1-c2); 
-  1- ((1-dold)^k*(1+a/2)-(a*h)/(1+h))^(1/k)
+  #print(c( (1-dold)^k,(1+a/2),(1-dold)^k*(1+a/2),(a*h)/(1+h)))
+  1- ( (1-dold)^k*(1+a/2) - (a*h)/(1+h) )^(1/k)
 }
 
+qplot(h, (correctd(c1=cl/y,c2=cl/y,h=h,dold=estd)-cord)/cord, linetype=as.factor(y),
+      color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
+      group=interaction(cl,y), data=merge(a,c(0.95,0.99,1.01,1.05)), geom="line") +facet_wrap(~D,nrow=1,labeller = label_both)+
+  theme_classic()+ 
+  scale_color_brewer(palette = "Spectral",name=expression(c[l])) + coord_cartesian(ylim=c(1,-1))+
+  scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
+  scale_x_continuous(labels=percent,name="Contaminant Jaccard")+
+  scale_linetype_manual(name="True/Estimated\ncontamination",values=c(3,4,2,5))+
+  theme(legend.position="bottom",legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+        panel.grid.major.y = element_line(size = 0.08,color = "gray70"))
 
-correctd2 = function(c1=0.15,c2=0.1,cc=1,h=0.05,dold=0.08886,k=31) {
-  a=c1/(1-c1)+c2/(1-c2); 
-  1- (((1-dold)^k)/cc*(1+a/2)-(a*h)/(1+h))^(1/k)
-}
+
+qplot(cl, (correctd(c1=cl/y,c2=cl/y,h=h,dold=estd)-cord)/cord,color=(h),group=interaction(h,y), linetype=as.factor(y),
+      data=merge(a[(a$h*100) %%10==0,],c(0.95,0.99,1.01,1.05)), geom="line") +
+  theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) + 
+  coord_cartesian(ylim=c(1,-1)) +
+  scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
+  scale_color_continuous(name="H",labels=percent,guide="legend")+
+  geom_hline(yintercept=0,linetype=1,color="red")+ 
+  facet_wrap(~D,nrow=1,labeller = label_both)+ 
+  scale_linetype_manual(name="True/Estimated\ncontamination",values=c(3,4,2,5))+
+  theme(legend.position="bottom",legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+        panel.grid.major.y = element_line(size = 0.05,color = "gray80"))
+ggsave("filter-free-sensitivity.pdf",width=11,height = 3.4)  
+
+qplot(cl, (correctd(c1=cl,c2=cl,h=h/y,dold=estd)-cord)/cord,color=(h),group=interaction(h,y), linetype=as.factor(y),
+      data=merge(a[(a$h*100) %%10==0,],c(0.95,0.99,1.01,1.05)), geom="line") +
+  theme_classic()+ scale_x_continuous(labels=percent,name=expression("Contamination level ("~c[l]~")")) + 
+  coord_cartesian(ylim=c(1,-1)) +
+  scale_y_continuous(name=expression(frac("estimated"-"true","true")~D),label=percent)+
+  scale_color_continuous(name="H",labels=percent,guide="legend")+
+  geom_hline(yintercept=0,linetype=1,color="red")+ 
+  facet_wrap(~D,nrow=1,labeller = label_both)+ 
+  scale_linetype_manual(name="True/Estimated\ncontaminant Jaccard (H)",values=c(3,4,2,5))+
+  theme(legend.position="bottom",legend.direction = "horizontal",panel.border  = element_rect(fill=NA,size = 1),
+        panel.grid.major.y = element_line(size = 0.05,color = "gray80"))
+ggsave("filter-free-sensitivity-2.pdf",width=11,height = 3.4)  
+
+
+# correctd2 = function(c1=0.15,c2=0.1,cc=1,h=0.05,dold=0.08886,k=31) {
+#   a=c1/(1-c1)+c2/(1-c2); 
+#   1- (((1-dold)^k)/cc*(1+a/2)-(a*h)/(1+h))^(1/k)
+# }
 
 

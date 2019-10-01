@@ -13,7 +13,9 @@ qplot(abs(bk_no_clean_up-fna_dist)/fna_dist-abs(ak_no_clean_up-fna_dist)/fna_dis
 
 qplot(abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_dist,data=ds,binwidth=0.02)
 qplot(fna_dist,abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_dist,data=ds)
- ggplot(aes(x=fna_dist,y=abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_dist,
+
+
+ggplot(aes(x=fna_dist,y=abs(bk_cleaned-fna_dist)/fna_dist-abs(ak_cleaned-fna_dist)/fna_dist,
            color=(C_sequences_prct.x+C_sequences_prct.y)/200),data=ds)+
   #geom_violin(aes(group=cut(ds$fna_dist,breaks=c(0,0.03,0.08,0.11,0.126,0.145,0.2))),scale="width")+
   geom_point()+geom_smooth(se=F,method="lm",color="grey50")+
