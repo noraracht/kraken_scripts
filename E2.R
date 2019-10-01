@@ -99,11 +99,11 @@ dh[dh$s2=="Drosophila_yakuba","D"] = 0.062705933
 
 dh$error = with(dh, (value-D)/D)
 
-qplot(Overlap/100,error,data=dh,color=Filtered,shape=Filtered)+geom_line()+
-  facet_wrap(~percent(round(D,3)))#+
-  scale_y_continuous(name="Relative error in Skmer distance",breaks=function(x) {if (x[2]<1.1) c(-sqrt(0.01),sqrt(c(0,0.01,0.05,0.2,0.5))) else c(-sqrt(0.05),sqrt(c(0,0.05,0.2,0.5,2,5)))},labels=function(x) percent(sign(x)*x^2))+
-  scale_x_continuous(labels=percent,name=expression("Contamination level"~c[l]),breaks=c(0,0.05,.1,0.2,0.4,0.6))+
-  scale_color_manual(values=c("#fecc5c",#"#fd8d3c",
-                              "#e31a1c","black"))+  
-  scale_linetype_manual(name="",values=c(2,1),labels=c("Before Kraken","After Kraken"))+scale_shape_manual(values=c(0,2,6,19))+
+qplot(Overlap/100,sign(error)*sqrt(abs(error)),data=dh,color=Filtered,shape=Filtered)+geom_line()+
+  facet_wrap(~percent(round(D,3)))+
+  scale_y_continuous(name="Relative error in Skmer distance",breaks= c(-sqrt(c(0,0.01,0.05,0.2,0.5,1))) ,labels=function(x) percent(sign(x)*x^2))+
+  scale_x_continuous(labels=percent,name=expression("Overlap"))+
+  scale_color_manual(values=c(#"#fecc5c",#"#fd8d3c",
+                              "#e31a1c","black"),labels=c("Before Kraken","After Kraken"),name="")+  
+  scale_shape_manual(name="",values=c(0,2,1),labels=c("Before Kraken","After Kraken") )+
   theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1), legend.position = "bottom",panel.grid.major.y = element_line(linetype = 1,size=0.2,color="gray"))
