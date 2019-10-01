@@ -99,9 +99,9 @@ dh[dh$s2=="Drosophila_yakuba","D"] = 0.062705933
 
 dh$error = with(dh, (value-D)/D)
 
-qplot(Overlap/100,sign(error)*sqrt(abs(error)),data=dh,color=Filtered,shape=Filtered)+geom_line()+
+qplot(Overlap/100,error,data=dh,color=Filtered,shape=Filtered)+geom_line()+
   facet_wrap(~percent(round(D,3)))+
-  scale_y_continuous(name="Relative error in Skmer distance",breaks= c(-sqrt(c(0,0.01,0.05,0.2,0.5,1))) ,labels=function(x) percent(sign(x)*x^2))+
+  scale_y_continuous(name="Relative error in Skmer distance")+ #, breaks= c(-sqrt(c(0,0.01,0.05,0.2,0.5,1))) ,labels=function(x) percent(sign(x)*x^2))+
   scale_x_continuous(labels=percent,name=expression("Overlap"))+
   scale_color_manual(values=c(#"#fecc5c",#"#fd8d3c",
                               "#e31a1c","black"),labels=c("Before Kraken","After Kraken"),name="")+  
