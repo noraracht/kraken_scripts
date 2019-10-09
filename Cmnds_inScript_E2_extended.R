@@ -44,7 +44,7 @@ ggplot(aes(x=FPR,y=recall,size=confidence_level,color=k,group=k),
   theme(panel.border  = element_rect(fill=NA,size = 1), 
         legend.position = c(.84,.23),legend.direction = "vertical",legend.box.background =  element_rect(linetype = 2), legend.box = "horizontal")+
   scale_x_continuous(breaks=c(0.2,0.5,0.8))+scale_y_continuous(labels=percent, name="Recall")
-ggsave("ROC-perbin_extended-col.pdf",width=5.2*1.2,height =4.2*1.2)
+ggsave("ROC-perbin_extended-col.pdf",width=5.2*1.1,height =4.2*1.1)
 
 qplot(FPR,recall,shape=as.factor(confidence_level),color=factor(bin),group=bin,data=r[r$FPR<0.2&r$confidence_level<0.4& !r$k %in% c(20,27,29),])+
   facet_wrap(~k,nrow=1,labeller = label_both)+geom_line()+

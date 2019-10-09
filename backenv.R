@@ -85,18 +85,19 @@ qplot((1-tp),y=abs((dj(est)-dj(cor))/dj(cor)),color=as.factor(-fp),geom="line",d
   scale_color_brewer(name=expression("FP ("~f[p]~")"),  palette = 1,label=function(x) percent(-as.numeric(x)))
 ggsave("backenvlope-RR-d-lines.pdf",width=6.5,height=5.5)
 
-qplot((1-tp),y=abs((dj(est)-dj(cor))/dj(cor)),color=as.factor(-fp),linetype=as.factor(cl),group=interaction(fp,cl),geom="line",
+qplot((1-tp),y=abs((dj(est)-dj(cor))/dj(cor)),color=(-fp),linetype=as.factor(cl),group=interaction(fp,cl),geom="line",
       data=a[xor(a$tp==0 , a$M!="N") &a$tp<=1 & a$cl %in%c(0.02,0.2) ,])+ 
   facet_grid(.~D,labeller=label_both)+
-  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1),legend.position="bottom")+
+  theme_classic() +theme(panel.border  = element_rect(fill=NA,size = 1),legend.position=c(.9,.6),legend.box = "horizontal",legend.box.background =  element_rect(linetype = 1))+
   scale_x_continuous(labels=percent,name=expression("FN rate ("~f[n]~")"),breaks = c(0.0,0.2,0.4))+
   scale_y_sqrt(name=expression(frac("estimated"-"true","true")~D),label=percent,breaks=c(0,0.1,0.01,1,3))+
   scale_fill_continuous(name="estimated/correct J",guide="none")+
   geom_hline(aes(yintercept=((dj(j(x=d,cl=cl))-dj(j(x=d)))/dj(j(x=d))),linetype=as.factor(cl)),color=2)+
   scale_linetype_manual(name=expression(c[l]),values=c(2,3,4,5),labels=percent(c(0.02,0.2)))+
-  scale_color_brewer(name=expression("FP ("~f[p]~")"),  palette = 1,label=function(x) percent(-as.numeric(x)))+
+  scale_color_continuous(name=expression(f[p]),  label=function(x) percent(-as.numeric(x)))+
+  #scale_color_brewer(name=expression("FP ("~f[p]~")"),  palette = 1,label=function(x) percent(-as.numeric(x)))+
   geom_hline(yintercept = 0)
-ggsave("backenvlope-RR-d-lines-compact.pdf",width=11,height = 3.4)
+ggsave("backenvlope-RR-d-lines-compact.pdf",width=11,height = 3.1)
 
 qplot(h, (estd-cord)/cord,color=factor((cl),levels=sort(cp,decreasing = T),labels = percent(sort(cp,decreasing = T))),
       group=cl, data=a,geom="line") +facet_wrap(~D,nrow=1,labeller = label_both)+
