@@ -39,7 +39,7 @@ ggplot(aes(x=FPR,y=recall,size=confidence_level,color=k,group=k),
   #scale_shape_manual(name=expression(alpha),values=c(1,0,2,6,5,4))+
   #scale_color_brewer(palette = "Spectral", name="k")+
   scale_color_gradient(guide="legend",high="#01237c",low = "#a6cbdf")+
-  scale_size_continuous(name=expression(alpha),range = c(1.5,0.1),breaks=unique(r$confidence_level))+
+  scale_size_continuous(name=expression(alpha),range = c(1.8,0.4),breaks=unique(r$confidence_level))+
   theme_classic() +
   theme(panel.border  = element_rect(fill=NA,size = 1), 
         legend.position = c(.84,.23),legend.direction = "vertical",legend.box.background =  element_rect(linetype = 2), legend.box = "horizontal")+
@@ -67,9 +67,10 @@ ggplot(aes(x=as.factor(bin),group=interaction(confidence_level,k),size=(confiden
                      #, sec.axis = sec_axis(~.*1, name = "FPR", labels = percent, breaks = c(0.007,0.048,0.086,.539))
                      )+
   scale_color_gradient(guide="legend",high="#01237c",low = "#85AACB", breaks=c(28,32,35),name=expression(k))+
-  geom_text(aes(label=percent(round(FPR,2)),y=recall),
+  coord_cartesian(xlim=c(1,11))+
+  geom_text(aes(label=paste(percent(round(FPR,2)),"FP"),y=recall),
             data=r[r$confidence_level %in% c(0,0.05)& r$k %in% c(28,32,35) & (r$bin==9),],
-            size=2.7,  nudge_y = .015, nudge_x = .33,show.legend = F)
+            size=2.8,  nudge_y = .01, nudge_x = .84,show.legend = F)
 ggsave("Recall-FPR.pdf",width = 4.2*0.95, height = 4.2*0.95)
 
 ggplot(aes(x=as.factor(bin),group=interaction(k),color=interaction(k,sep=" / ")),data=r[r$confidence_level <0.4 & !r$k %in% c(23,20),])+
