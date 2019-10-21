@@ -22,12 +22,12 @@ This repository contains summary data tables and scripts we used to processes th
 * Sensitivity analysis of Kraken
     - [summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv](https://github.com/noraracht/kraken_scripts/blob/master/summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv) contains percent read classified at domain level or lower for every query sequence. It serves as an input for  [Cmnds_inScript_E1.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E1.R) script to generate results depicted in Fig. S5 and S6. 
     
-     - [export_df_all_data_extended.csv](https://github.com/noraracht/kraken_scripts/blob/master/export_df_all_data_extended.csv) contains FN, FP, TP, FN, FPR, recall computed per bin. It is an input for  [Cmnds_inScript_E2_extended.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E2_extended.R) script to generate ROC curves depicted in Fig. 3 and S7.
+     - [export_df_all_data_extended.csv](https://github.com/noraracht/kraken_scripts/blob/master/export_df_all_data_extended.csv) contains FN, FP, TP, TN, FPR, recall computed per bin. It is an input for  [Cmnds_inScript_E2_extended.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E2_extended.R) script to generate ROC curves depicted in Fig. 3 and S7.
    
 
    - [E1_exp_parser_viralDB.ipynb](https://github.com/noraracht/kraken_scripts/blob/master/E1_exp_parser_viralDB.ipynb) script to extract data about classified at domain or below.
    
-    - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_viral_parser_v3_binned_conf_matrix_for_contamination-checkpoint.ipynb) script to extract data about classified at domain or below.
+    - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_viral_parser_v3_binned_conf_matrix_for_contamination-checkpoint.ipynb) script to read output reports and compute statistics at the bin level.
    
 * Theoretical exposition
     - [backenv.R](https://github.com/noraracht/kraken_scripts/blob/master/backenv.R)
