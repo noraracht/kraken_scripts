@@ -12,10 +12,10 @@ This repository contains summary data tables and scripts we used to processes th
 
 
 * Filtering real Drosophila genome skims.
-    - [sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv](sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv) has information about percentages of reads classified by Kraken in total and for different domains of life.
+    - [sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv](sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv) has information about percentages of reads classified by Kraken.
     - [drosophilaskims.csv](https://github.com/noraracht/kraken_scripts/blob/master/drosophilaskims.csv) contains relative distance error before and after filtering for every pair of Drosophila skims.
-    - [E3_script_dros_real_noABS2.R](https://github.com/noraracht/kraken_scripts/blob/master/E3_script_dros_real_noABS2.R) script takes [sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv](sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv) and [drosophilaskims.csv](https://github.com/noraracht/kraken_scripts/blob/master/drosophilaskims.csv) tables above as an input and generates results for experiment shown in Fig. 5a, 5c, S9, S10.
-    - [Drosophila_C_to_different_domains.csv](https://github.com/noraracht/kraken_scripts/blob/master/Drosophila_C_to_different_domains.csv) has percentages classified by Kraken for every species at different domain levels.
+    - [E3_script_dros_real_noABS2.R](https://github.com/noraracht/kraken_scripts/blob/master/E3_script_dros_real_noABS2.R) script takes [sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv](sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv) and [drosophilaskims.csv](https://github.com/noraracht/kraken_scripts/blob/master/drosophilaskims.csv) tables above as an input and generates results for Figs. 5a, 5c, S9, S10.
+    - [Drosophila_C_to_different_domains.csv](https://github.com/noraracht/kraken_scripts/blob/master/Drosophila_C_to_different_domains.csv) has percentages classified by Kraken for every specie at different domain levels.
     - [Stacked_bar_plot_dros_dif_domains2.R](https://github.com/noraracht/kraken_scripts/blob/master/Stacked_bar_plot_dros_dif_domains2.R) script takes Drosophila_C_to_different_domains.csv](https://github.com/noraracht/kraken_scripts/blob/master/Drosophila_C_to_different_domains.csv) as an input and generates plot in Fig. 5b.
     
      
