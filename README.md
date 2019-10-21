@@ -20,7 +20,7 @@ This repository contains summary data tables and scripts we used to processes th
     
     
 * Sensitivity analysis of Kraken
-    - [summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv](https://github.com/noraracht/kraken_scripts/blob/master/summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv) contains percent read classified at domain level or lower for every query sequence. [Cmnds_inScript_E1.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E1.R) script takes [summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv](https://github.com/noraracht/kraken_scripts/blob/master/summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv) as an input and build plot in Fig. S5 and S6.
+    - [summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv](https://github.com/noraracht/kraken_scripts/blob/master/summary_report_kraken_viral_dist_unmasked_0.0_corrected_k35.csv) contains percent read classified at domain level or lower for every query sequence. It serves as an input for  [Cmnds_inScript_E1.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E1.R) script to generate results depicted in Fig. S5 and S6.
      
     
 
