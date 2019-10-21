@@ -2,8 +2,7 @@
 
 This repository contains summary data tables and scripts we used to processes them.
 
-* Query summary reports used for sensitivity analysis:
-    - [dros-overlap-exp-Tol-db.R](https://github.com/noraracht/kraken_scripts/blob/master/dros-overlap-exp-Tol-db.R) takes as an input [my-data-output_true_H.csv](https://github.com/noraracht/kraken_scripts/blob/master/my-data-output_true_H.csv)
+* [dros-overlap-exp-Tol-db.R](https://github.com/noraracht/kraken_scripts/blob/master/dros-overlap-exp-Tol-db.R) script takes as an input [my-data-output_true_H.csv](https://github.com/noraracht/kraken_scripts/blob/master/my-data-output_true_H.csv) data table and generates results for contamination overlap experiment.
 
 
 * Query summary reports and distance matrices used for simulation experiment with non overlapping contaminants:
