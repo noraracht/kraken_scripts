@@ -13,7 +13,8 @@ This repository contains summary data tables and scripts we used to processes th
 
 * Filtering real Drosophila genome skims.
     - [sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv](sum_report_skmer_14dros_real_cleaned_kraken_std_unmasked_0.0_k35.csv) has information about percentages of reads classified by Kraken in total and for different domains of life.
-    - [drosophilaskims.csv](https://github.com/noraracht/kraken_scripts/blob/master/drosophilaskims.csv) contains relative distance error before and after filtering for every pair of Drosophila skims. 
+    - [drosophilaskims.csv](https://github.com/noraracht/kraken_scripts/blob/master/drosophilaskims.csv) contains relative distance error before and after filtering for every pair of Drosophila skims.
+    
     [E3_script_dros_real_noABS2.R](https://github.com/noraracht/kraken_scripts/blob/master/E3_script_dros_real_noABS2.R) script takes both tables above as an input and generates results for experiment shown in Fig. 5a, 5c, S9, S10.
 
 
