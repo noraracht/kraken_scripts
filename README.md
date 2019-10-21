@@ -3,7 +3,7 @@
 This repository contains summary data tables and scripts we used to processes them.
 
 * Query summary reports used for sensitivity analysis:
-    - [report\_kraken\_viral\_dist\_unmasked\_{confidence level}\_corrected\_{k-mer size}.tar.gz](https://github.com/noraracht/kraken_raw_data)
+    - [dros-overlap-exp-Tol-db.R](https://github.com/noraracht/kraken_scripts/blob/master/dros-overlap-exp-Tol-db.R)
 
 
 * Query summary reports and distance matrices used for simulation experiment with non overlapping contaminants:
