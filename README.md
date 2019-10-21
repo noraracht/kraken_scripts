@@ -29,5 +29,8 @@ This repository contains summary data tables and scripts we used to processes th
    
     - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_viral_parser_v3_binned_conf_matrix_for_contamination-checkpoint.ipynb) script to extract data about classified at domain or below.
    
-   
+* Theoretical exposition
+    - [backenv.R](https://github.com/noraracht/kraken_scripts/blob/master/backenv.R)
+
+
 
