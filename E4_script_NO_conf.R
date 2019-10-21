@@ -1,6 +1,8 @@
 require(ggplot2); require(scales); require(reshape2)
 getwd()
 setwd("/Users/admin/Documents/Skimming/tree_of_life/dros_contam_test")
+
+######################################################################################################
 d= read.csv('Drosophila_contam_both_species3.csv')
 print (d)
 dm = (melt(d[,c(1,2,grep(pattern = "*Dros*", names(d)))],id.vars = 1:2))
@@ -24,6 +26,10 @@ dm$error = with(dm, (est-D)/D)
 print (dm)
 
 write.csv(dm,"/Users/admin/Documents/Skimming/tree_of_life/dros_contam_test/Drosophila_contam_both_species_formatted.csv", row.names = FALSE)
+######################################################################################################
+
+# This code should be used on fomatted input
+
 install.packages("readxl")
 library(readxl)
 dm= read.csv('Drosophila_contam_both_species_formatted.xls')
