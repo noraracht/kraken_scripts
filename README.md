@@ -2,11 +2,6 @@
 
 This repository contains summary data tables and scripts we used to processes them.
 
-[Cmnds_inScript_E1.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E1.R)
-
-
-
-
 
 * Filtering on simulated Drosophila genome skims with non overlapping contaminant portions.
     - [Drosophila_contam_both_species_formatted.xls](https://github.com/noraracht/kraken_scripts/blob/master/Drosophila_contam_both_species_formatted.xls) contains information about genomic distances estimated before and after filtering for simulated Drosophila genomes where only one of the species was contaminated. [E4_script_NO_conf.R](https://github.com/noraracht/kraken_scripts/blob/master/E4_script_NO_conf.R) script takes this data table as an input and generates results for experiment represented in Fig. 4a.
