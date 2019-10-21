@@ -1,4 +1,5 @@
-#Access to the data used for Kraken benchmarking
+# Access to the data used for Kraken benchmarking
+
 This repository contains summary data tables and scripts we used to processes them.
 
 * Query summary reports used for sensitivity analysis:
