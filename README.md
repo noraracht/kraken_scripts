@@ -25,7 +25,7 @@ This repository contains summary data tables and scripts we used to processes th
      - [export_df_all_data_extended.csv](https://github.com/noraracht/kraken_scripts/blob/master/export_df_all_data_extended.csv) contains FN, FP, TP, TN, FPR, recall computed per bin. It is an input for  [Cmnds_inScript_E2_extended.R](https://github.com/noraracht/kraken_scripts/blob/master/Cmnds_inScript_E2_extended.R) script to generate ROC curves depicted in Fig. 3 and S7.
    
 
-   - [E1_exp_parser_viralDB.ipynb](https://github.com/noraracht/kraken_scripts/blob/master/E1_exp_parser_viralDB.ipynb) script to extract data about classified at domain level or below.
+   - [E1_exp_parser_viralDB.ipynb](https://github.com/noraracht/kraken_scripts/blob/master/E1_exp_parser_viralDB.ipynb) script to extract data about percent reads classified at domain level or below.
    
     - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_viral_parser_v3_binned_conf_matrix_for_contamination-checkpoint.ipynb) script to read output reports and compute statistics at the bin level. Also requires, 10kmatrix and keep_exclude files.
    
