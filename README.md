@@ -27,7 +27,7 @@ This repository contains summary data tables and scripts we used to processes th
 
    - [E1_exp_parser_viralDB.ipynb](https://github.com/noraracht/kraken_scripts/blob/master/E1_exp_parser_viralDB.ipynb) script to extract data about percent reads classified at domain level or below.
    
-    - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_viral_parser_v3_binned_conf_matrix_for_contamination-checkpoint.ipynb) script to read output reports and compute statistics at the bin level. Also requires, 10kmatrix and keep_exclude files.
+    - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_viral_parser_v3_binned_conf_matrix_for_contamination-checkpoint.ipynb) reads output reports and computes statistics at the bin level. Also requires, 10kmatrix and keep_exclude files.
    
 * Theoretical exposition
     - [backenv.R](https://github.com/noraracht/kraken_scripts/blob/master/backenv.R)
