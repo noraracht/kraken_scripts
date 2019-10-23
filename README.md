@@ -27,7 +27,7 @@ This repository contains summary data tables and scripts we used to processes th
 
    - [E1_exp_parser_viralDB.ipynb](https://github.com/noraracht/kraken_scripts/blob/master/E1_exp_parser_viralDB.ipynb) script to extract data about percent reads classified at domain level or below.
    
-    - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_parser_v4_binned_conf_matrix_-checkpoint.ipynb) reads output reports and computes statistics at the bin level. It requires, [10Kmatrix](https://github.com/noraracht/kraken_scripts/blob/master/10K_dist_stats.csv), [excluded_genomes](https://github.com/noraracht/kraken_scripts/blob/master/Keep_exclude_corrected.csv) and [metadata](https://github.com/noraracht/kraken_scripts/blob/master/metadata.tsv).
+    - [kraken_report_parser_for binned output](https://github.com/noraracht/kraken_scripts/blob/master/kraken_report_parser_v4_binned_conf_matrix_-checkpoint.ipynb) reads output reports and computes statistics at the bin level. It requires [10Kmatrix](https://github.com/noraracht/kraken_scripts/blob/master/10K_dist_stats.csv), [excluded_genomes](https://github.com/noraracht/kraken_scripts/blob/master/Keep_exclude_corrected.csv) and [metadata](https://github.com/noraracht/kraken_scripts/blob/master/metadata.tsv).
    
 * Theoretical exposition
     - [backenv.R](https://github.com/noraracht/kraken_scripts/blob/master/backenv.R)
