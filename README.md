@@ -32,5 +32,13 @@ This repository contains summary data tables and scripts we used to processes th
 * Theoretical exposition
     - [backenv.R](https://github.com/noraracht/kraken_scripts/blob/master/backenv.R)
 
+* Phylogenetic analysis
+    - [Drosophila-FME.R](https://github.com/noraracht/kraken_scripts/blob/master/Drosophila-FME.R) Script that generates Figure 5d and S11. It requires [FME_per_species.csv](https://github.com/noraracht/kraken_scripts/blob/master/FME_per_species.csv) and [amount.csv](https://github.com/noraracht/kraken_scripts/blob/master/amount.csv).
+
+    - [jc.py](https://github.com/noraracht/kraken_scripts/blob/master/jc.py)
+      performes Jukes-Cantor tranformation of distances output by Skmer.
+
+    - [wrf.R](https://github.com/noraracht/kraken_scripts/blob/master/wrf.R)
+      computes weighted and unweighted RF distance between two trees. 
 
 
