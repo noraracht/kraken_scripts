@@ -47,7 +47,7 @@ This repository contains summary data tables and scripts we used to processes th
       python split_cseq_human_from_bac_v2.py -i CerSimSim1.0_0.1x.fastq -threads 24 -db $DBNAME -confidence1 0.0 -confidence2 0.5
       ```
 
-      [Kraken-II](https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual) should be installed and database constructed. User can specify a threshold for first (`-confidence1`) and second (`-confidence2`) confidence scores in the [0.0 1.0] interval. Default confidence values are 0.0 and 0.5 for first and second filtering, correspondingly.
+      [Kraken-II](https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual) should be installed and database constructed. User can specify a threshold for first (`-confidence1`) and second (`-confidence2`) confidence scores in the [0.0, 1.0] interval. Default confidence values are 0.0 and 0.5 for first and second filtering, correspondingly.
       Replace "$DBNAME" above with your preferred database name/location. If multiple processing cores are available, number of threads can be modified with `-threads` option. Results can be assessed based on output reports.
  
   
