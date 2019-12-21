@@ -48,7 +48,7 @@ This repository contains summary data tables and scripts we used to processes th
       ```
 
       [Kraken-II](https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual) should be installed and database constructed. Our standard database is available in [kraken_db_standard_k35l31s7](https://drive.google.com/drive/folders/1vDfSY2o9-zXPY5a0E64oWjqRaqPyCrsL?usp=sharing).
-      User can specify a threshold for first (`-confidence1`) and second (`-confidence2`) confidence scores in the [0.0, 1.0] interval. Default confidence values are 0.0 and 0.5 for first and second filtering, correspondingly.
+      User can specify a threshold for first (`-confidence1`) and second (`-confidence2`) confidence scores in the [0.0, 1.0] interval. Default confidence values are 0.0 and 0.5, correspondingly.
       Replace "$DBNAME" above with your preferred database name/location. If multiple processing cores are available, number of threads can be modified with `-threads` option. Results can be assessed based on output reports.
  
   
